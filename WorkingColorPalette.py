@@ -29,6 +29,7 @@ class PaletteGenerator:
 
         change = 1
         while change > 0.00001:
+            
             catlist = PaletteGenerator.categorize(x_list, y_list, z_list, x_means, y_means, z_means)
             x_means, y_means, z_means, change = PaletteGenerator.refine_mean(
                 num_of_colors, catlist, x_list, y_list, z_list, x_means, y_means, z_means
@@ -85,7 +86,7 @@ class PaletteGenerator:
                     catcount += 1
                 count += 1
 
-            if count != 0:
+            if count != 0 and catcount !=0:
                 meanx = xsum//catcount
                 meany = ysum//catcount
                 meanz = zsum//catcount
@@ -95,10 +96,15 @@ class PaletteGenerator:
                 newxmeans.append(meanx)
                 newymeans.append(meany)
                 newzmeans.append(meanz)
-            else:
+            elif catcaount != 0:
                 newxmeans.append(xmeans[j])
                 newymeans.append(ymeans[j])
                 newzmeans.append(zmeans[j])
+                
+            else:
+                newxmeans.append(None)
+                newymeans.append(None)
+                newzmeans.append(None)
 
         return newxmeans, newymeans, newzmeans, change
 
